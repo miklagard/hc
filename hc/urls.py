@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     (r'^$', include('hc.apps.main.urls')),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^accounts/', include('registration.urls')),
+
 )
 
 if settings.DEBUG and settings.MEDIA_ROOT:

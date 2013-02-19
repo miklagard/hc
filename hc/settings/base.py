@@ -27,6 +27,7 @@ SECRET_KEY = 'g&amp;3z&amp;3^$v#%1u*4dty+lft44wx9c&amp;m#t=o$f+88*su(*0zcynw'
 
 INSTALLED_APPS = (
     'hc.apps.main',
+    'django_extensions',
 
     #'south',
 

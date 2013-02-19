@@ -6,5 +6,5 @@ from django.template import Context, RequestContext
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 
-def main(request):
+def start(request):
 	return HttpResponse("here we go")

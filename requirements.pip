@@ -1,8 +1,6 @@
-# This file collects all required third-party applications that are needed
-# to run this project. Later you can install all these apps in a row
-# using pip. Example::
-#
-#     pip install -r requirements.pip
-
-django==1.4.1
-#south==0.7.6
+Django==1.4.3
+argparse==1.2.1
+distribute==0.6.24
+django-extensions==1.0.3
+psycopg2==2.4.6
+wsgiref==0.1.2

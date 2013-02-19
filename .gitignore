@@ -1,0 +1,5 @@
+*.pyc
+*.egg-info
+hc/settings/local.py
+hc/settings/local/*
+docs/_build

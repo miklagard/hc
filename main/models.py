@@ -8,10 +8,13 @@ class Country(models.Model):
         return u"%s" % self.name
 
 class UserProfile(models.Model):
+	GENDER_CHOICES=(('m', 'Male'), ('f', 'Female'))
+	
 	fullname = models.CharField(max_length=50, null=False, blank=False)
 	street = models.CharField(max_length=300)
 	country = models.ForeignKey("Country")
-	gender = models.CharField(max_length=1)
+
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 	birth_date = models.DateField()
 	phone_home = models.CharField(max_length=12)
 	phone_work  = models.CharField(max_length=12)

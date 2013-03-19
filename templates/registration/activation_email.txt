@@ -1,0 +1,6 @@
+For activating your account, the activation key is: {{ activation_key }}
+
+Please click the following link for activating your account.
+
+http://hospitalityclub.org/accounts/activate/{{ activation_key }}/
+

@@ -1,0 +1,52 @@
+{% extends "registration/regbase.html" %}
+
+{% load i18n %}
+{% block content %}
+
+
+<div id="main">
+	<div id="content">
+		<div id="container">	
+			{% if form.non_field_errors %}
+			<div id="xerror">
+				{{ form.non_field_errors }}
+			</div>
+			
+			<br />
+			{% endif %}
+			<div id="login">
+				<form action="{{ app_path }}" method="post" id="register-form">{% csrf_token %}	
+				
+				<h1>Register</h1>
+
+				<div class="field">
+					<label for="id_email">E-Mail</label>
+					<input id="id_email" type="text" name="email" maxlength="30" class="input email_field" />{{ form.email.errors }}					
+				</div>
+
+				<div class="field">
+					<label for="id_username">Username</label>
+					<input id="id_username" type="text" name="username" maxlength="30" class="input user_field" />{{ form.username.errors }}					
+				</div>
+				
+				<div class="field">
+					<label for="id_password1">Password</label>
+					<input id="id_password1" type="password" name="password1" class="input password_field" value=""/>{{ form.password.errors }}	
+				</div>
+	
+				<div class="field">
+					<label for="id_password2">Password (Confirm)</label>
+					<input id="id_password2" type="password" name="password2" class="input password_field" value=""/>{{ form.password.errors }}	
+				</div>
+
+				<input type="submit" value="Register" />
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>document.forms['register-form'].elements['id_email'].focus()</script>
+
+
+{% endblock %}

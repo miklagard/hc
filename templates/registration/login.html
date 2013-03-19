@@ -1,0 +1,51 @@
+{% extends "registration/regbase.html" %}
+
+{% load i18n %}
+{% block content %}
+
+	
+	<div id="main">
+		<div id="content">
+			<div id="container">	
+				{% if form.non_field_errors %}
+				<div id="error">
+					{{ form.non_field_errors }}
+				</div>
+				
+				<br />
+				{% endif %}
+				<div id="login">
+					<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}	
+					<h1>Login</h1>
+					<div class="field">
+						<label for="id_username">User Name</label>
+						<input id="id_username" type="text" name="username" maxlength="30" class="input user_field" />{{ form.username.errors }}					
+					</div>
+		
+					<div class="field">
+						<label for="id_password">Password</label>
+						<input id="id_password" type="password" name="password" class="input password_field" value=""/>{{ form.password.errors }}	
+					</div>
+		
+					<div class="field">
+						<input type="submit" name="submitLogin" value="Login" class="button fl margin-right-5" />
+		
+						<p class="fl no-margin hide ajax-loader">
+						</p>
+		
+						<p class="fr no-margin">
+							<a href="/accounts/password/reset/" class="show-forgot-password">Forgot password?</a>
+						</p>
+						<div class="clear">&nbsp;</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<a href="/accounts/register/">Register</a>
+
+	<script>document.forms['login-form'].elements['id_username'].focus()</script>
+
+{% endblock %}

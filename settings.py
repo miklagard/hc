@@ -101,6 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'hc.urls'
@@ -119,6 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.conf.locale',
     'hc.main',
     'registration',
     'django_extensions',
@@ -150,3 +152,9 @@ LOGGING = {
         },
     }
 }
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, "translations"),
+)
+
+ACCOUNT_ACTIVATION_DAYS = 7

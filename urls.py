@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
 from hc.settings import MEDIA_ROOT
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,13 +13,10 @@ urlpatterns = patterns('',
 	url(r'^tour/(?P<nr>[\w|\W]+)/$', "hc.main.views.tour", name="tour"),
     url(r'^about/$', 'hc.main.views.about', name='about'),
     url(r'^countries/$', 'hc.main.views.countries', name='countries'),
+    url(r'^country/(?P<id>[\w|\W]+)/$', "hc.main.views.country", name="country"),
     url(r"^media/(?P<path>.*)$", "django.views.static.serve", dict(document_root = MEDIA_ROOT), name="media-root"),
     url(r"^static/(?P<path>.*)$", "django.views.static.serve", dict(document_root = MEDIA_ROOT), name="static-root"),   
     url(r'^accounts/', include('registration.urls')),
-    
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )

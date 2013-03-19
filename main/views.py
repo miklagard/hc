@@ -1,8 +1,7 @@
-# Create your views here.
-
 from hc.main.models import Country
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import Context, RequestContext
+from django.utils.translation import ugettext as _
 
 def home(request):    
     return render_to_response("main.html", context_instance=RequestContext(request))
@@ -34,4 +33,9 @@ def about(request):
     return render_to_response("about.html", context_instance=RequestContext(request))
 
 def countries(request):
-    return render_to_response("countries.html", context_instance=RequestContext(request))
+	countries = Country.objects.all().order_by("name")
+	return render_to_response("countries.html", {"countries": countries}, context_instance=RequestContext(request))
+
+def country(request, id):
+	country = Country.objects.get(id = id)
+	return render_to_response("country.html", {"country": country}, context_instance=RequestContext(request))

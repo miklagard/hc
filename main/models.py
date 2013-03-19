@@ -9,7 +9,7 @@ class Country(models.Model):
 
 class UserProfile(models.Model):
 	GENDER_CHOICES=(('m', 'Male'), ('f', 'Female'))
-	
+
 	fullname = models.CharField(max_length=50, null=False, blank=False)
 	street = models.CharField(max_length=300)
 	country = models.ForeignKey("Country")

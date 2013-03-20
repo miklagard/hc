@@ -176,6 +176,6 @@ USER_ONLINE_TIMEOUT = 300
 # their last seen is removed from the cache
 USER_LASTSEEN_TIMEOUT = 60
 
-AUTH_PROFILE_MODULE = 'users.UserProfile'
+AUTH_PROFILE_MODULE = 'main.UserProfile'
 
 MEMCAHCED_SERVER = ['127.0.0.1:11211']

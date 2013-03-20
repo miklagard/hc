@@ -16,17 +16,17 @@ class Country(models.Model):
 class UserProfile(models.Model):
 	GENDER_CHOICES=(('m', 'Male'), ('f', 'Female'))
 
-	fullname = models.CharField(max_length=50, null=True, blank=False)
-	street = models.CharField(max_length=300, null=True, blank=False)
-	country = models.ForeignKey("Country", null=True, blank=False)
+	fullname = models.CharField(max_length=50, null=True, blank=True)
+	street = models.CharField(max_length=300, null=True, blank=True)
+	country = models.ForeignKey("Country", null=True, blank=True)
 
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=False)
-	birth_date = models.DateField(null=True, blank=False)
-	phone_home = models.CharField(max_length=12, null=True, blank=False)
-	phone_work  = models.CharField(max_length=12, null=True, blank=False)
-	fax = models.CharField(max_length=12, null=True, blank=False)
-	occupation = models.CharField(max_length=20, null=True, blank=False)
-	profile_summary = models.TextField(null=True, blank=False)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+	birth_date = models.DateField(null=True, blank=True)
+	phone_home = models.CharField(max_length=12, null=True, blank=True)
+	phone_work  = models.CharField(max_length=12, null=True, blank=True)
+	fax = models.CharField(max_length=12, null=True, blank=True)
+	occupation = models.CharField(max_length=20, null=True, blank=True)
+	profile_summary = models.TextField(null=True, blank=True)
 
 	icq = models.CharField(max_length=12, null=True, blank=True)
 	skype = models.CharField(max_length=22, null=True, blank=True)

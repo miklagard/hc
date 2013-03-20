@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
-from hc.main.models import Country
-from django.shortcuts import render_to_response, get_object_or_404
+from hc.main.models import Country, UserProfile
+from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib import auth
+from django.contrib.auth.models import User
+from hc.main.forms import ProfileForm
 import redis
 
 def online_users():
@@ -31,7 +33,15 @@ def rules(request):
     return render_to_response("rules.html", context_instance=RequestContext(request))
 
 def edit(request):    
-    return render_to_response("edit.html", context_instance=RequestContext(request))
+    if request.method == 'POST': 
+        form = ProfileForm(request.POST, instance=request.user.get_profile()) 
+        if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/accounts/profile/') 
+    else:
+        form = ProfileForm(instance=request.user.get_profile()) 
+
+    return render_to_response("edit.html", {"form": form}, context_instance=RequestContext(request))
 
 def userprofile(request, username):    
     return render_to_response("userprofile.html", {"username": username}, context_instance=RequestContext(request))

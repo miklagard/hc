@@ -1,7 +1,11 @@
+# -*- coding:utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db.models.signals import post_save
-import memcache
+import datetime
+from hc.settings import USER_ONLINE_TIMEOUT
+import redis
 
 class Country(models.Model):
     name = models.CharField(max_length = 36)
@@ -32,30 +36,25 @@ class UserProfile(models.Model):
 
 	user = models.OneToOneField(User) 
 	
+	def last_seen(self):
+		return redis.Redis().get(self.user.username)
+
+	def online(self):
+
+		if redis.Redis().get(self.user.username):
+			return True
+		else:
+			return False
+
 	def __unicode__(self):
 		return self.user.username
 	
 	class Meta:
 		ordering=['-id']
 
-	def last_seen(self):
-		client = memcache.Client(['127.0.0.1:11211'])
-		return "cem" #str(client.get('seen_%s' % self.user.username))
-
-	def online(self):
-		if self.last_seen():
-			now = datetime.datetime.now()
-			if now > self.last_seen() + datetime.timedelta(seconds=settings.USER_ONLINE_TIMEOUT):
-				return False
-			else:
-				return True
-		else:
-			return False
-
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance)  
- 
+
 post_save.connect(create_user_profile, sender=User)
- 
-User.profile = property(lambda u: u.get_profile() )
+User.profile = property(lambda u: u.get_profile())

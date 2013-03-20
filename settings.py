@@ -1,5 +1,5 @@
 # Django settings for hc project.
-
+# -*- coding:utf-8 -*-
 import os
 
 DEBUG = True
@@ -164,8 +164,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 # Setup caching per Django docs. In actuality, you'd probably use memcached instead of local memory.
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'default-cache'
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
     }
 }
 
@@ -174,6 +174,8 @@ USER_ONLINE_TIMEOUT = 300
 
 # Number of seconds that we will keep track of inactive users for before 
 # their last seen is removed from the cache
-USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
+USER_LASTSEEN_TIMEOUT = 60
 
 AUTH_PROFILE_MODULE = 'users.UserProfile'
+
+MEMCAHCED_SERVER = ['127.0.0.1:11211']

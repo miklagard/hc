@@ -1,11 +1,19 @@
+# -*- coding:utf-8 -*-
 from hc.main.models import Country
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib import auth
+import redis
+
+def online_users():
+	ret = []
+	for k in redis.Redis().keys():
+		ret.append(k)
+	return ret
 
 def home(request):    
-    return render_to_response("main.html", context_instance=RequestContext(request))
+    return render_to_response("main.html", {"online": online_users()}, context_instance=RequestContext(request))
 
 def faq(request):    
     return render_to_response("faq.html", context_instance=RequestContext(request))
@@ -21,6 +29,12 @@ def spammerfame(request):
 
 def rules(request):    
     return render_to_response("rules.html", context_instance=RequestContext(request))
+
+def edit(request):    
+    return render_to_response("edit.html", context_instance=RequestContext(request))
+
+def userprofile(request, username):    
+    return render_to_response("userprofile.html", {"username": username}, context_instance=RequestContext(request))
 
 def tour(request, nr):
 	if int(nr) == 1:
@@ -49,7 +63,7 @@ def country(request, id):
 
 def logout(request):
 	auth.logout(request)
-	return render_to_response("main.html", context_instance=RequestContext(request))
+	return render_to_response("main.html", {"online": online_users()}, context_instance=RequestContext(request))
 
 #@login_required
 def profile(request):

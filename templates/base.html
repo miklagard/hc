@@ -1,4 +1,5 @@
 {% load i18n %}
+{% if user.userprofile.online %}{%endif%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
       <a class="brand" href="/">{% trans "Hospitality Club" %}</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="#">{% trans "Home" %}</a></li>
+          <li class="active"><a href="/">{% trans "Home" %}</a></li>
           <li><a href="/faq/">{% trans "FAQ" %}</a></li>
           <li><a href="/tour/1/">{% trans "Tour" %}</a></li>
           <li><a href="/countries/">{% trans "Countries" %}</a></li>
@@ -42,7 +43,7 @@
                   <li class="divider"></li>
                   <li class="nav-header">Profile</li>
                   <li><a href="/accounts/profile/">My Profile</a></li>
-                  <li><a href="#">Edit Profile</a></li>
+                  <li><a href="/edit/">Edit Profile</a></li>
                   <li class="divider"></li>
                   <li><a href="/logout/">Log Out</a></li>
                 </ul>

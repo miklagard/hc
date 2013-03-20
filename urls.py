@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.conf.urls.defaults import patterns, include, url
 from hc.settings import MEDIA_ROOT
 # Uncomment the next two lines to enable the admin:
@@ -12,10 +13,12 @@ urlpatterns = patterns('',
     url(r'^rules/$', 'hc.main.views.rules', name='rules'),
 	url(r'^tour/(?P<nr>[\w|\W]+)/$', "hc.main.views.tour", name="tour"),
     url(r'^about/$', 'hc.main.views.about', name='about'),
+    url(r'^edit/$', 'hc.main.views.edit', name='edit'),
     url(r'^stopspam/$', 'hc.main.views.stopspam', name='stopspam'),
     url(r'^spammerfame/$', 'hc.main.views.spammerfame', name='spammerfame'),
     url(r'^countries/$', 'hc.main.views.countries', name='countries'),
     url(r'^country/(?P<id>[\w|\W]+)/$', "hc.main.views.country", name="country"),
+    url(r'^profile/(?P<username>[\s|\S]+)/$', "hc.main.views.userprofile", name="userprofile"),
     url(r"^media/(?P<path>.*)$", "django.views.static.serve", dict(document_root = MEDIA_ROOT), name="media-root"),
     url(r"^static/(?P<path>.*)$", "django.views.static.serve", dict(document_root = MEDIA_ROOT), name="static-root"),   
     url(r'^accounts/', include('registration.urls')),
@@ -23,5 +26,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^forum/$', include('forums.urls')),
     url(r'^logout/$', 'hc.main.views.logout', name='logout'),
-    url(r'^accounts/profile/$', 'hc.main.views.profile', name='profile'),
+    url(r'^accounts/profile/$', 'hc.main.views.profile', name='myprofile'),
 )

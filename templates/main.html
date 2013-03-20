@@ -4,45 +4,45 @@
 {% block description %}Free network of people around the world who offer free accommodation, advice and help when they are traveling - hospitality exchange. Free membership.{% endblock %}
 
 {% block content %}
-
-			<div>	
-				{% if form.non_field_errors %}
-				<div id="error">
-					{{ form.non_field_errors }}
-				</div>
-				
-				<br />
-				{% endif %}
-				<div id="login">
-					<form action="/accounts/login/" method="post" id="login-form">{% csrf_token %}	
-					<h1>Login</h1>
-					<div class="field">
-						<label for="id_username">User Name</label>
-						<input id="id_username" type="text" name="username" maxlength="30" class="input user_field" />{{ form.username.errors }}					
-					</div>
+{% if not user.is_authenticated %}
+	<div>	
+		{% if form.non_field_errors %}
+		<div id="error">
+			{{ form.non_field_errors }}
+		</div>
 		
-					<div class="field">
-						<label for="id_password">Password</label>
-						<input id="id_password" type="password" name="password" class="input password_field" value=""/>{{ form.password.errors }}	
-					</div>
-		
-					<div class="field">
-						<input type="submit" name="submitLogin" value="Login" class="button fl margin-right-5" />
-		
-						<p class="fl no-margin hide ajax-loader">
-						</p>
-		
-						<p class="fr no-margin">
-							<a href="/accounts/password/reset/" class="show-forgot-password">Forgot password?</a>
-						</p>
-						<div class="clear">&nbsp;</div>
-					</div>
-					</form>
-				</div>
-
-				<a href="/accounts/register/">Register</a>
+		<br />
+		{% endif %}
+		<div id="login">
+			<form action="/accounts/login/" method="post" id="login-form">{% csrf_token %}	
+			<h1>Login</h1>
+			<div class="field">
+				<label for="id_username">User Name</label>
+				<input id="id_username" type="text" name="username" maxlength="30" class="input user_field" />{{ form.username.errors }}					
 			</div>
 
+			<div class="field">
+				<label for="id_password">Password</label>
+				<input id="id_password" type="password" name="password" class="input password_field" value=""/>{{ form.password.errors }}	
+			</div>
+
+			<div class="field">
+				<input type="submit" name="submitLogin" value="Login" class="button fl margin-right-5" />
+
+				<p class="fl no-margin hide ajax-loader">
+				</p>
+
+				<p class="fr no-margin">
+					<a href="/accounts/password/reset/" class="show-forgot-password">Forgot password?</a>
+				</p>
+				<div class="clear">&nbsp;</div>
+			</div>
+			</form>
+		</div>
+
+		<a href="/accounts/register/">Register</a>
+	</div>
+{% endif %}
 
 <p><b>Do you love meeting people from other cultures? Do you love traveling? Do you love helping other people? Then this is the place for you to be!</b></p>
 

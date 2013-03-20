@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'hc.main.middleware.activeuser_middleware.ActiveUserMiddleware',
 )
 
 ROOT_URLCONF = 'hc.urls'
@@ -124,6 +125,7 @@ INSTALLED_APPS = (
     'hc.main',
     'registration',
     'django_extensions',
+    'forums',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -158,3 +160,20 @@ LOCALE_PATHS = (
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+# Setup caching per Django docs. In actuality, you'd probably use memcached instead of local memory.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+# Number of seconds of inactivity before a user is marked offline
+USER_ONLINE_TIMEOUT = 300
+
+# Number of seconds that we will keep track of inactive users for before 
+# their last seen is removed from the cache
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
+
+AUTH_PROFILE_MODULE = 'users.UserProfile'

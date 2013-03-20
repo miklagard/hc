@@ -1,5 +1,7 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+import memcache
 
 class Country(models.Model):
     name = models.CharField(max_length = 36)
@@ -10,20 +12,50 @@ class Country(models.Model):
 class UserProfile(models.Model):
 	GENDER_CHOICES=(('m', 'Male'), ('f', 'Female'))
 
-	fullname = models.CharField(max_length=50, null=False, blank=False)
-	street = models.CharField(max_length=300)
-	country = models.ForeignKey("Country")
+	fullname = models.CharField(max_length=50, null=True, blank=False)
+	street = models.CharField(max_length=300, null=True, blank=False)
+	country = models.ForeignKey("Country", null=True, blank=False)
 
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-	birth_date = models.DateField()
-	phone_home = models.CharField(max_length=12)
-	phone_work  = models.CharField(max_length=12)
-	fax = models.CharField(max_length=12)
-	occupation = models.CharField(max_length=20)
-	profile_summary = models.TextField()
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=False)
+	birth_date = models.DateField(null=True, blank=False)
+	phone_home = models.CharField(max_length=12, null=True, blank=False)
+	phone_work  = models.CharField(max_length=12, null=True, blank=False)
+	fax = models.CharField(max_length=12, null=True, blank=False)
+	occupation = models.CharField(max_length=20, null=True, blank=False)
+	profile_summary = models.TextField(null=True, blank=False)
 
 	icq = models.CharField(max_length=12, null=True, blank=True)
 	skype = models.CharField(max_length=22, null=True, blank=True)
 	aol = models.CharField(max_length=12, null=True, blank=True)
 	yahoo = models.CharField(max_length=12, null=True, blank=True)
 	other_chat = models.CharField(max_length=50, null=True, blank=True)
+
+	user = models.OneToOneField(User) 
+	
+	def __unicode__(self):
+		return self.user.username
+	
+	class Meta:
+		ordering=['-id']
+
+	def last_seen(self):
+		client = memcache.Client(['127.0.0.1:11211'])
+		return "cem" #str(client.get('seen_%s' % self.user.username))
+
+	def online(self):
+		if self.last_seen():
+			now = datetime.datetime.now()
+			if now > self.last_seen() + datetime.timedelta(seconds=settings.USER_ONLINE_TIMEOUT):
+				return False
+			else:
+				return True
+		else:
+			return False
+
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+       profile, created = UserProfile.objects.get_or_create(user=instance)  
+ 
+post_save.connect(create_user_profile, sender=User)
+ 
+User.profile = property(lambda u: u.get_profile() )

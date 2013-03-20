@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'hc.main.middleware.activeuser_middleware.ActiveUserMiddleware',
+    'main.middleware.activeuser_middleware.ActiveUserMiddleware',
 )
 
 ROOT_URLCONF = 'hc.urls'

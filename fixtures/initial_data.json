@@ -1,5 +1,14 @@
 [
     {
+        "pk": 10, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "category", 
+            "name": "category", 
+            "app_label": "forums"
+        }
+    }, 
+    {
         "pk": 4, 
         "model": "contenttypes.contenttype", 
         "fields": {
@@ -18,6 +27,15 @@
         }
     }, 
     {
+        "pk": 11, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "forum", 
+            "name": "forum", 
+            "app_label": "forums"
+        }
+    }, 
+    {
         "pk": 2, 
         "model": "contenttypes.contenttype", 
         "fields": {
@@ -27,12 +45,30 @@
         }
     }, 
     {
+        "pk": 14, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "logentry", 
+            "name": "log entry", 
+            "app_label": "admin"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "contenttypes.contenttype", 
         "fields": {
             "model": "permission", 
             "name": "permission", 
             "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "post", 
+            "name": "post", 
+            "app_label": "forums"
         }
     }, 
     {
@@ -63,6 +99,15 @@
         }
     }, 
     {
+        "pk": 12, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "topic", 
+            "name": "topic", 
+            "app_label": "forums"
+        }
+    }, 
+    {
         "pk": 3, 
         "model": "contenttypes.contenttype", 
         "fields": {
@@ -78,6 +123,14 @@
             "model": "userprofile", 
             "name": "user profile", 
             "app_label": "main"
+        }
+    }, 
+    {
+        "pk": "a177920c45a4e15f56ba72934b060707", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-04-03T09:36:58", 
+            "session_data": "YjYxZmZlM2M2M2JjYmRhZDU2Y2EwNzllZmRjY2QzNTM2NzA1ZTlkMTqAAn1xAShVCnRlc3Rjb29r\naWVVBndvcmtlZHECVRJfYXV0aF91c2VyX2JhY2tlbmRVKWRqYW5nby5jb250cmliLmF1dGguYmFj\na2VuZHMuTW9kZWxCYWNrZW5kVQ1fYXV0aF91c2VyX2lkigEBdS4=\n"
         }
     }, 
     {
@@ -1714,6 +1767,33 @@
         }
     }, 
     {
+        "pk": 40, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_logentry", 
+            "name": "Can add log entry", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_logentry", 
+            "name": "Can change log entry", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_logentry", 
+            "name": "Can delete log entry", 
+            "content_type": 14
+        }
+    }, 
+    {
         "pk": 4, 
         "model": "auth.permission", 
         "fields": {
@@ -1819,6 +1899,114 @@
             "codename": "delete_contenttype", 
             "name": "Can delete content type", 
             "content_type": 4
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_category", 
+            "name": "Can add category", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_category", 
+            "name": "Can change category", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_category", 
+            "name": "Can delete category", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_forum", 
+            "name": "Can add forum", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_forum", 
+            "name": "Can change forum", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_forum", 
+            "name": "Can delete forum", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_post", 
+            "name": "Can add post", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_post", 
+            "name": "Can change post", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_post", 
+            "name": "Can delete post", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_topic", 
+            "name": "Can add topic", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_topic", 
+            "name": "Can change topic", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_topic", 
+            "name": "Can delete topic", 
+            "content_type": 12
         }
     }, 
     {
@@ -1954,6 +2142,126 @@
             "codename": "delete_site", 
             "name": "Can delete site", 
             "content_type": 6
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "cem.yildiz", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2013-03-20T09:16:32", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$c3m1yurn3uTu$M6Qnt4LqyiHlaTqJScsuXNfFJXTkisoctHLBvEI7lSA=", 
+            "email": "cem.yildiz@markafoni.com", 
+            "date_joined": "2013-03-20T08:33:26"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "cem.yildiz2", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2013-03-20T08:52:13", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$nkRyg1zIHGqn$SA/nH4PYWyicouPfMutIeVlIiOuvKpqwZjjqYrfiJDI=", 
+            "email": "cem.yildiz@markafoni.com", 
+            "date_joined": "2013-03-20T08:51:00"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "main.userprofile", 
+        "fields": {
+            "anything_else": null, 
+            "street": null, 
+            "postal_code": null, 
+            "skype": null, 
+            "planned_trips": null, 
+            "occupation": null, 
+            "icanoffer": null, 
+            "interestingthings": null, 
+            "other_chat": null, 
+            "gender_of_guest": null, 
+            "last_update": null, 
+            "last_login": null, 
+            "icq": null, 
+            "fax": null, 
+            "registration_date": null, 
+            "accomodation": null, 
+            "aol": null, 
+            "yahoo": null, 
+            "travel_experience": null, 
+            "phone_home": null, 
+            "user": 2, 
+            "hobbies_interests": null, 
+            "languages_spoken": null, 
+            "nearbytransport": null, 
+            "organizations": null, 
+            "phone_work": null, 
+            "country": null, 
+            "nearbycities": null, 
+            "profile_summary": null, 
+            "gender": null, 
+            "birth_date": null, 
+            "fullname": null
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "main.userprofile", 
+        "fields": {
+            "anything_else": null, 
+            "street": "dfgdfsg", 
+            "postal_code": null, 
+            "skype": "", 
+            "planned_trips": null, 
+            "occupation": "", 
+            "icanoffer": null, 
+            "interestingthings": null, 
+            "other_chat": "54647564", 
+            "gender_of_guest": null, 
+            "last_update": null, 
+            "last_login": null, 
+            "icq": "", 
+            "fax": "", 
+            "registration_date": null, 
+            "accomodation": null, 
+            "aol": "", 
+            "yahoo": "6435465", 
+            "travel_experience": null, 
+            "phone_home": "", 
+            "user": 1, 
+            "hobbies_interests": null, 
+            "languages_spoken": null, 
+            "nearbytransport": null, 
+            "organizations": null, 
+            "phone_work": "", 
+            "country": 226, 
+            "nearbycities": null, 
+            "profile_summary": "gdsgsdfgfdg\r\nfsdg\r\nfsdgfsd\r\ngfsd\r\ng\r\nfsdg\r\nfs", 
+            "gender": "m", 
+            "birth_date": "1921-02-03", 
+            "fullname": "dsgfdg \u0131"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "registration.registrationprofile", 
+        "fields": {
+            "activation_key": "ALREADY_ACTIVATED", 
+            "user": 2
         }
     }
 ]

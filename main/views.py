@@ -43,8 +43,9 @@ def edit(request):
 
     return render_to_response("edit.html", {"form": form}, context_instance=RequestContext(request))
 
-def userprofile(request, username):    
-    return render_to_response("userprofile.html", {"username": username}, context_instance=RequestContext(request))
+def userprofile(request, username):
+	profile = get_object_or_404(UserProfile, user=get_object_or_404(User, username=username))
+	return render_to_response("userprofile.html", {"user": profile}, context_instance=RequestContext(request))
 
 def tour(request, nr):
 	if int(nr) == 1:
@@ -77,4 +78,4 @@ def logout(request):
 
 #@login_required
 def profile(request):
-	return render_to_response("profile.html", context_instance=RequestContext(request))
+	return render_to_response("profile.html", {"usr": request.user.get_profile()}, context_instance=RequestContext(request))

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Login for free accommodation and hospitality exchange :-) Hospitality Club	{% endblock%}
+{% block keywords %}hospitality exchange home exchange free accommodation accomodation budget travel cheap travel meet people worldwide backpacking backpacker hostel stay for free homestay accomodations accommodations make friends world peace meet travelers where to stay intercultural friendship{% endblock %}
+{% block description %}Free network of people around the world who offer free accommodation, advice and help when they are traveling - hospitality exchange. Free membership.{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+<!--
+	label { text-align: right; width: 252px; display: inline-block; }
+//-->
+</style>
+
+<form method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

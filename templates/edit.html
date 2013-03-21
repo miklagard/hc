@@ -5,6 +5,12 @@
 
 {% block content %}
 
+<style type="text/css">
+<!--
+	label { text-align: right; width: 252px; display: inline-block; }
+//-->
+</style>
+
 <form method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />

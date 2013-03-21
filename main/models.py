@@ -14,9 +14,11 @@ class Country(models.Model):
         return u"%s" % self.name
 
 class UserProfile(models.Model):
-	GENDER_CHOICES=(('m', 'Male'), ('f', 'Female'))
-	GENDER_OF_GUEST=(("Male", "Male"), ("Female", "Female"), ("Doesn't Matter", "Doesn't Matter"))
-
+	GENDER_CHOICES = (('m', 'Male'), ('f', 'Female'))
+	GENDER_OF_GUEST = (("Male", "Male"), ("Female", "Female"), ("Doesn't Matter", "Doesn't Matter"))
+	ACCOMODATION_OFFER = ("Yes", "Yes"), ("Maybe", "Maybe"), ("No", "No, Please Don't Ask")
+	NUMBER_OF_GUEST = ((1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (9,9), (10, 10))
+	SMOKING = (("No Problem", "No Problem"), ("Outside Only", "Outside Only"), ("Not At All", "Not At All"))
 	fullname = models.CharField(max_length=50, null=True, blank=True)
 	street = models.CharField(max_length=300, null=True, blank=True)
 	country = models.ForeignKey("Country", null=True, blank=True)
@@ -42,17 +44,59 @@ class UserProfile(models.Model):
 	travel_experience = models.CharField(max_length=500, null=True, blank=True)
 	planned_trips = models.CharField(max_length=500, null=True, blank=True)
 	anything_else = models.CharField(max_length=300, null=True, blank=True)
-	accomodation = models.BooleanField(default=False)
+	offer_accomodation = models.CharField(max_length=5, choices=ACCOMODATION_OFFER, null=True, blank=True)
+	best_times = models.CharField(max_length=300, null=True, blank=True)
 	icanoffer = models.CharField(max_length=200, null=True, blank=True)
+	offer_dinner = models.BooleanField(default=False)
+	show_around_town = models.BooleanField(default=False)
 	nearbytransport = models.CharField(max_length=300, null=True, blank=True)
 	nearbycities = models.CharField(max_length=500, null=True, blank=True)
 	interestingthings = models.CharField(max_length=500, null=True, blank=True)
 
-	gender_of_guest = models.CharField(choices=GENDER_OF_GUEST, max_length=12, null=True, blank=True, default="Doesn't Matter")
+	gender_of_guest = models.CharField(choices=GENDER_OF_GUEST, max_length=14, null=True, blank=True, default="Doesn't Matter")
+	number_of_guest = models.IntegerField(choices=NUMBER_OF_GUEST, null=True, blank=True)
+
+	live_with_partner = models.BooleanField(default=False)
+	live_with_parents = models.BooleanField(default=False)
+	live_with_other_people = models.BooleanField(default=False)
+	live_with_my_children = models.BooleanField(default=False)
+	live_with_siblings = models.BooleanField(default=False)
+	live_alone = models.BooleanField(default=False)
+
+	bring_tent = models.BooleanField(default=False)
+	bring_camping_mattress = models.BooleanField(default=False)
+	bring_sleeping_bag = models.BooleanField(default=False)
+
+	offer_garden = models.BooleanField(default=False)
+	offer_sofa = models.BooleanField(default=False)
+	offer_sperate_room = models.BooleanField(default=False)
+	offer_floor = models.BooleanField(default=False)
+	offer_mattress = models.BooleanField(default=False)
+	offer_bed = models.BooleanField(default=False)
+	offer_other = models.CharField(max_length=30, null=True, blank=True)
 
 	last_login = models.DateField(default=datetime.datetime.now())
 	registration_date = models.DateField(default=datetime.datetime.now())
 	last_update = models.DateField(default=datetime.datetime.now())
+
+	restrictions_no_drugs = models.BooleanField(default=False)
+	restrictions_no_alcohol = models.BooleanField(default=False)
+	restrictions_no_dishes = models.BooleanField(default=False)
+	restrictions_pay_for_phone_calls = models.BooleanField(default=False)
+	restrictions_pay_for_food = models.BooleanField(default=False)
+	restrictions_other = models.CharField(max_length=50, null=True, blank=True)
+	
+	should_notify = models.IntegerField(null=True, blank=True)
+	can_call_on_arrival = models.BooleanField(default=False)
+
+	smoking = models.CharField(choices=SMOKING, max_length=12, null=True, blank=True, default="Outside Only")
+
+	maximum_days_of_stay = models.CharField(max_length=50, null=True, blank=True)
+
+	call_from = models.CharField(max_length=5, null=True, blank=True)
+	call_to = models.CharField(max_length=5, null=True, blank=True)
+
+	pets = models.CharField(max_length=50, null=True, blank=True)
 
 	user = models.OneToOneField(User) 
 	

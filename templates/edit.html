@@ -11,7 +11,7 @@
 //-->
 </style>
 
-<form method="post">{% csrf_token %}
+<form method="post" enctype="multipart/form-data" action="/edit/">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>

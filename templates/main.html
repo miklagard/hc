@@ -54,7 +54,9 @@
 
 <p>Come onboard - join the largest online hospitality exchange organization! You will meet friendly people and find free accommodation when you travel to any corner of the world. There are no obligations (you do not have to host anyone at your home!), membership is free and we would love to have you in our world wide web of friendly people! </p>
 <p><b>Online users</b></p>
+<table>
 {%for user in online %}
-<a href="/profile/{{user}}">{{user}}</a>
+	<tr><td><a href="/profile/{{user.username}}">{{user.username}}</a></td><td><a href="/country/{{user.country_id}}/">{{user.country_name}}</a></td></tr>
 {%endfor%}
+</table>
 {% endblock %}

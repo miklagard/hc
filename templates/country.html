@@ -5,5 +5,24 @@
 
 {% block content %}
 
-	{{country.name}}
+	<p><b>Active members in {{country.name}}</b></p>
+
+	<table width="100%">
+		<tr>
+			<td>Photo</td>
+			<td>User name</td>
+			<td>Name</td>
+			<td>Accommodation</td>
+			<td>Profile Summary</td> 
+		</tr>
+		{% for user in users %}
+		<tr>
+			<td>{{user.photo}}</td>
+			<td><a href="/profile/{{user.user.username}}/">{{user.user.username}}</a></td>
+			<td>{{user.fullname}}</td>
+			<td>{{user.offer_accomodation}}</td>
+			<td>{{user.profile_summary}}</td> 
+		</tr>
+		{% endfor%}
+	</table>
 {% endblock %}

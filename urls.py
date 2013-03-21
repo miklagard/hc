@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^forum/$', include('forums.urls')),
+    url(r'^attachments/', include('attachments.urls')),
     url(r'^logout/$', 'hc.main.views.logout', name='logout'),
     url(r'^accounts/profile/$', 'hc.main.views.profile', name='myprofile'),
 )

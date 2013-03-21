@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models.signals import post_save
 import datetime
-from hc.settings import USER_ONLINE_TIMEOUT
+from hc.settings import USER_ONLINE_TIMEOUT, UPLOAD_DIR
 import redis
+from easy_thumbnails.fields import ThumbnailerImageField
 
 class Country(models.Model):
     name = models.CharField(max_length = 36)
@@ -31,7 +32,9 @@ class UserProfile(models.Model):
 	fax = models.CharField(max_length=12, null=True, blank=True)
 	occupation = models.CharField(max_length=20, null=True, blank=True)
 	profile_summary = models.TextField(null=True, blank=True)
-
+	#picture = ImageWithThumbsField(upload_to="upload", sizes=((125,125),(200,200)))
+	#picture = models.ImageField(upload_to="osman")
+	picture = ThumbnailerImageField(upload_to=UPLOAD_DIR, blank=True)
 	icq = models.CharField(max_length=12, null=True, blank=True)
 	skype = models.CharField(max_length=22, null=True, blank=True)
 	aol = models.CharField(max_length=12, null=True, blank=True)
@@ -75,7 +78,6 @@ class UserProfile(models.Model):
 	offer_bed = models.BooleanField(default=False)
 	offer_other = models.CharField(max_length=30, null=True, blank=True)
 
-	last_login = models.DateField(default=datetime.datetime.now())
 	registration_date = models.DateField(default=datetime.datetime.now())
 	last_update = models.DateField(default=datetime.datetime.now())
 
@@ -99,7 +101,127 @@ class UserProfile(models.Model):
 	pets = models.CharField(max_length=50, null=True, blank=True)
 
 	user = models.OneToOneField(User) 
-	
+
+
+	def member_since(self):
+		from dateutil import relativedelta as rdelta
+		from datetime import datetime
+		rd = rdelta.relativedelta(datetime.now(), self.user.date_joined)
+		return "{0.years} years, {0.months} months {0.days} days".format(rd)
+
+	def notifications(self):
+		ret = []
+		if self.should_notify:
+			ret.append("should notify %s days in advance" % str(self.should_notify))
+
+		if self.can_call_on_arrival == True:
+			ret.append("can call on arrival")
+
+		if self.call_from == "" and self.call_to != "":
+			ret.append("asked to call before %s" % self.call_to)
+
+		if self.call_from != "" and self.call_to == "":
+			ret.append("asked to call after %s" % selfcall_from)
+
+		if self.call_from != "" and self.call_to != "":
+			ret.append("asked to call between %s and %s" % (self.call_from, self.call_to))
+
+		return ", ".join(ret)
+
+	def pleasebring(self):
+		ret = []
+		if self.bring_tent:
+			ret.append("tent")
+		if self.bring_camping_mattress:
+			ret.append("mattress") 
+		if self.bring_sleeping_bag:
+			ret.append("sleeping bag")
+		return ", ".join(ret)
+
+	def sleeping_offer(self):
+		ret = []
+		if self.offer_garden:
+			ret.append("garden")
+		if self.offer_sofa:
+			ret.append("sofa")
+		if self.offer_sperate_room:
+			ret.append("separated room")
+		if self.offer_floor:
+			ret.append("floor")
+		if self.offer_mattress:
+			ret.append("mattress")
+		if self.offer_bed:
+			ret.append("bed")
+		if self.offer_other:
+			ret.append(self.offer_other)
+		return ", ".join(ret)
+
+	def i_offer(self):
+		ret = []
+		if self.offer_dinner:
+			ret.append("have someone over for dinner")
+		if self.show_around_town:
+			ret.append("show around town")
+		if self.icanoffer:
+			ret.append(self.icanoffer)
+
+		return ", ".join(ret)
+
+	def instant_contact(self):
+		ret = []
+		if self.icq != "":
+			ret.append({"what": "ICQ", "value": self.icq})
+		if self.skype != "":
+			ret.append({"what": "Skype", "value": self.skype})
+		if self.aol != "":
+			ret.append({"what": "AOL", "value": self.aol})
+		if self.yahoo != "":
+			ret.append({"what": "Yahoo Messenger", "value": self.yahoo})
+		if self.other_chat != "":
+			ret.append({"what": "Others", "value": self.other_chat})
+		return ret
+
+	def restrictions(self):
+		ret = []
+		if self.restrictions_no_drugs:
+			ret.append("no drugs")
+		if self.restrictions_no_alcohol:
+			ret.append("no alcohol")
+		if self.restrictions_no_dishes:
+			ret.append("no dishes")
+		if self.restrictions_pay_for_phone_calls:
+			ret.append("has to pay for phone calls")
+		if self.restrictions_pay_for_food:
+			ret.append("has to pay for food")
+		if self.restrictions_other != "":
+			ret.append(self.restrictions_other)
+		return ", ".join(ret)
+
+	def gender_desc(self):
+		if self.gender == "f":
+			return "Female"
+		elif self.gender == "m":
+			return "Male"
+		else:
+			return ""
+
+	def live_with(self):
+		ret = []
+		if self.live_with_partner:
+			ret.append("my partner (wife, husband, girl/boyfriend)")
+		if self.live_with_parents:
+			ret.append("parents")
+		if self.live_with_other_people:
+			ret.append("other people")
+		if self.live_with_my_children:
+			ret.append("my child(ren)")
+		if self.live_with_siblings:
+			ret.append("siblings")
+		if self.live_alone:
+			ret.append("alone")
+
+		return ", ".join(ret)
+
 	def last_seen(self):
 		return redis.Redis().get(self.user.username)
 

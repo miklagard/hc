@@ -1,12 +1,19 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 {% block title %}Login for free accommodation and hospitality exchange :-) Hospitality Club	{% endblock%}
 {% block keywords %}hospitality exchange home exchange free accommodation accomodation budget travel cheap travel meet people worldwide backpacking backpacker hostel stay for free homestay accomodations accommodations make friends world peace meet travelers where to stay intercultural friendship{% endblock %}
 {% block description %}Free network of people around the world who offer free accommodation, advice and help when they are traveling - hospitality exchange. Free membership.{% endblock %}
 
 {% block content %}
+	<script type="text/javascript">
+	<!--
+	$(document).ready(function(){
+		$(".group").colorbox({rel:'group1'});
+	});
+	//-->
+	</script>
 
 	<p><b>Active members in {{country.name}}</b></p>
-
 	<table width="100%">
 		<tr>
 			<td>Photo</td>
@@ -15,13 +22,13 @@
 			<td>Accommodation</td>
 			<td>Profile Summary</td> 
 		</tr>
-		{% for user in users %}
+		{% for usr in users %}
 		<tr>
-			<td>{{user.photo}}</td>
-			<td><a href="/profile/{{user.user.username}}/">{{user.user.username}}</a></td>
-			<td>{{user.fullname}}</td>
-			<td>{{user.offer_accomodation}}</td>
-			<td>{{user.profile_summary}}</td> 
+			<td><a href="{{usr.picture.url}}" class="group"><img src="{{ usr.picture|thumbnail_url:'list' }}" /></a></td>
+			<td><a href="/profile/{{usr.user.username}}/">{{usr.user.username}}</a></td>
+			<td>{{usr.fullname}}</td>
+			<td>{{usr.offer_accomodation}}</td>
+			<td>{{usr.profile_summary}}</td> 
 		</tr>
 		{% endfor%}
 	</table>

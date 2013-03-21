@@ -24,7 +24,7 @@
 		</tr>
 		{% for usr in users %}
 		<tr>
-			<td><a href="{{usr.picture.url}}" class="group"><img src="{{ usr.picture|thumbnail_url:'list' }}" /></a></td>
+			<td><a title="{{usr.user.username}}" href="{{usr.picture.url}}" class="group"><img src="{{ usr.picture|thumbnail_url:'list' }}" /></a></td>
 			<td><a href="/profile/{{usr.user.username}}/">{{usr.user.username}}</a></td>
 			<td>{{usr.fullname}}</td>
 			<td>{{usr.offer_accomodation}}</td>

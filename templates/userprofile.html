@@ -40,7 +40,7 @@ $(document).ready(function(){
 			<td>Name:</td>
 			<td colspan="2">hidden&nbsp;&nbsp;</td>
 			<td align="center" rowspan="6" colspan="2">
-				<a class="group" href="{{usr.picture.url}}"><img src="{{ usr.picture|thumbnail_url:'profile' }}" alt="" /></a>
+				<a class="group" title="{{usr.user.username}}" href="{{usr.picture.url}}"><img src="{{ usr.picture|thumbnail_url:'profile' }}" alt="" /></a>
 			</td>
 		</tr>
 		<tr>

@@ -32,8 +32,7 @@ class UserProfile(models.Model):
 	fax = models.CharField(max_length=12, null=True, blank=True)
 	occupation = models.CharField(max_length=20, null=True, blank=True)
 	profile_summary = models.TextField(null=True, blank=True)
-	#picture = ImageWithThumbsField(upload_to="upload", sizes=((125,125),(200,200)))
-	#picture = models.ImageField(upload_to="osman")
+
 	picture = ThumbnailerImageField(upload_to=UPLOAD_DIR, blank=True)
 	icq = models.CharField(max_length=12, null=True, blank=True)
 	skype = models.CharField(max_length=22, null=True, blank=True)
@@ -78,7 +77,7 @@ class UserProfile(models.Model):
 	offer_bed = models.BooleanField(default=False)
 	offer_other = models.CharField(max_length=30, null=True, blank=True)
 
-	registration_date = models.DateField(default=datetime.datetime.now())
+	#registration_date = models.DateField(default=datetime.datetime.now())
 	last_update = models.DateField(default=datetime.datetime.now())
 
 	restrictions_no_drugs = models.BooleanField(default=False)
@@ -102,6 +101,7 @@ class UserProfile(models.Model):
 
 	user = models.OneToOneField(User) 
 
+	comments =  models.ForeignKey("Comments", null=True, blank=True)
 
 	def member_since(self):
 		from dateutil import relativedelta as rdelta
@@ -240,6 +240,19 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance)  
+
+class Comments(models.Model):
+	comment_created = models.DateField(null=False, blank=False, default=datetime.datetime.now())
+	comment_updated = models.DateField(null=False, blank=False, default=datetime.datetime.now())
+
+	trust = models.BooleanField(default=False)
+	host = models.BooleanField(default=False)
+	guest = models.BooleanField(default=False)
+	passport_checked = models.BooleanField(default=False)
+	where_did_you_meet = models.CharField(max_length=300, null=False, blank=False)
+	comment = models.CharField(max_length=500, null=False, blank=False)
+
+	user = models.ForeignKey(User) 
 
 post_save.connect(create_user_profile, sender=User)
 User.profile = property(lambda u: u.get_profile())

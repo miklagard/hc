@@ -17,4 +17,10 @@ class ProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = UserProfile
-		exclude=("user","last_login","registration_date","last_update")
+		exclude=("user","last_login","registration_date","last_update","comments")
+
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comments
+		exclude=("user","comment_created","comment_updated")

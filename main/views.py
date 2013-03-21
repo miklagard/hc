@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
-from hc.main.models import Country, UserProfile
+from hc.main.models import Country, UserProfile, Comments
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib import auth
 from django.contrib.auth.models import User
-from hc.main.forms import ProfileForm
+from hc.main.forms import ProfileForm, CommentForm
 import redis
 from easy_thumbnails.files import get_thumbnailer
 
@@ -84,3 +84,21 @@ def logout(request):
 	auth.logout(request)
 	return render_to_response("main.html", {"online": online_users()}, context_instance=RequestContext(request))
 
+def comments(request, username):
+	profile = get_object_or_404(UserProfile, user=get_object_or_404(User, username=username))
+	return render_to_response("comments.html", {"usr": profile}, context_instance=RequestContext(request))
+
+def writecomment(request, username):
+    if request.method == 'POST': 
+        form = CommentForm(request.POST) 
+        if form.is_valid():
+			form.save(commit=False)
+			form.user = request.user
+			form.user_id = get_object_or_404(User, username=username).id
+			form.save()
+
+			return HttpResponseRedirect('/profile/%s/' % username) 
+    else:
+        form = CommentForm(request.POST) 
+
+    return render_to_response("writecomment.html", {"form": form}, context_instance=RequestContext(request))

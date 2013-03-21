@@ -27,4 +27,7 @@ urlpatterns = patterns('',
     url(r'^attachments/', include('attachments.urls')),
     url(r'^logout/$', 'hc.main.views.logout', name='logout'),
     url(r'^accounts/profile/$', 'hc.main.views.profile', name='myprofile'),
+    url(r'^comments/(?P<username>[\s|\S]+)/$', "hc.main.views.comments", name="comments"),
+    url(r'^writecomment/(?P<username>[\s|\S]+)/$', "hc.main.views.writecomment", name="comments"),
+
 )

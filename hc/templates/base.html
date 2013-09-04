@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="{% block description %}{% endblock %}">
-<link type="text/css" rel="stylesheet" href="/media/css/hc.css" />
-<link type="text/css" rel="stylesheet" href="/media/css/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="/media/css/bootstrap-responsive.min.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/hc.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/bootstrap-responsive.min.css" />
 
 <meta name="keywords" content="{% block keyword %}{% endblock %}">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="/media/js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 
 <title>{% block title %}{% endblock %}</title>
 </head>
@@ -24,18 +24,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">{% trans "Hospitality Club" %}</a>
+          <a class="brand" href="/"><img alt="Hospitality Club" src="/static/img/hc_logo.png" /></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="{% active request '/' %}"><a href="/">{% trans "Home" %}</a></li>
               <li class="{% active request '/faq/' %}"><a href="/faq/">{% trans "FAQ" %}</a></li>
+              {% if not user.is_authenticated %} 
               <li class="{% active request '/tour/' %}"><a href="/tour/1/">{% trans "Tour" %}</a></li>
+              {% endif %}
 				<li class="{% active request '/countries/' %}"><a href="/countries/">{% trans "Countries" %}</a></li>
 				<li class="{% active request '/rules/' %}"><a href="/rules/">{% trans "Rules" %}</a></li>
             </ul>
             <ul class="nav pull-right">
-			<li class="{% active request '/accounts/register/' %}"><a href="/accounts/register/">{% trans "Sign Up" %}</a></li>
-			<li class="{% active request '/accounts/login/' %}"><a href="/accounts/login/">{% trans "Log In" %}</a></li>
+              {% if not user.is_authenticated %} 
+        			<li class="{% active request '/accounts/register/' %}"><a href="/accounts/register/">{% trans "Sign Up" %}</a></li>
+        			<li class="{% active request '/accounts/login/' %}"><a href="/accounts/login/">{% trans "Log In" %}</a></li>
+              {% else %}
+              <li class="{% active request '/accounts/logout/' %}"><a href="/accounts/logout/">{% trans "Log Out" %}</a></li>
+              {% endif %}
 			</ul>
           </div><!--/.nav-collapse -->
         </div>

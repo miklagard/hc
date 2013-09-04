@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Login for free accommodation and hospitality exchange :-) Hospitality Club	{% endblock%}
+{% block title %}{% if not user.is_authenticated %} Login for free accommodation and hospitality exchange :-){% endif %} Hospitality Club{% endblock%}
 {% block keywords %}hospitality exchange home exchange free accommodation accomodation budget travel cheap travel meet people worldwide backpacking backpacker hostel stay for free homestay accomodations accommodations make friends world peace meet travelers where to stay intercultural friendship{% endblock %}
 {% block description %}Free network of people around the world who offer free accommodation, advice and help when they are traveling - hospitality exchange. Free membership.{% endblock %}
 
 {% block content %}
+{% if not user.is_authenticated %} 
 <div>	
 	{% if form.non_field_errors %}
 	<div id="error">
@@ -41,11 +42,11 @@
 
 	<a href="/accounts/register/">Register</a>
 </div>
-
+{% endif %}
 <div>
 	<h1>Online users</h1>
 	{% for user in online_users %}
-		{{user}}
+		{{user}}<br />
 	{% endfor %}
 </div>
 

@@ -10,7 +10,7 @@ Virtual Enviroment:
     
 Install requirements
 
-    pip install -r requeirement.pip
+    pip install -r requirements.pip
 
 Please don't forget to export your e-mail settings before running the project:
 

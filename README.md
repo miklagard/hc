@@ -24,7 +24,7 @@ DB Settings:
 
 Project is written for MySql for the initial process. You should create a db with root username called hc. After setting the DB, don't forget to syncdb.
 
-    python manage.py sycndb
+    python manage.py syncdb
 
 Run DEBUG project:
  

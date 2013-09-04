@@ -31,6 +31,7 @@
               <li class="{% active request '/faq/' %}"><a href="/faq/">{% trans "FAQ" %}</a></li>
               {% if not user.is_authenticated %} 
               <li class="{% active request '/tour/' %}"><a href="/tour/1/">{% trans "Tour" %}</a></li>
+              <li class="{% active request '/learn/' %}"><a href="/learn/">{% trans "Learn" %}</a></li>
               {% endif %}
 				<li class="{% active request '/countries/' %}"><a href="/countries/">{% trans "Countries" %}</a></li>
 				<li class="{% active request '/rules/' %}"><a href="/rules/">{% trans "Rules" %}</a></li>

@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'registration',
     'hc',
     'django_extensions',
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -171,6 +172,12 @@ LOCALE_PATHS = (
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',

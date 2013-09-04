@@ -2,18 +2,19 @@ from hc.models import Country
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
+from hc.activeuser_middleware import get_online_users
 
 def home(request):    
-    return render_to_response("main.html", context_instance=RequestContext(request))
+	return render_to_response("main.html", {"online_users": get_online_users()}, context_instance=RequestContext(request))
 
 def faq(request):    
-    return render_to_response("faq.html", context_instance=RequestContext(request))
+	return render_to_response("faq.html", context_instance=RequestContext(request))
 
 def learn(request):    
-    return render_to_response("learn.html", context_instance=RequestContext(request))
+	return render_to_response("learn.html", context_instance=RequestContext(request))
 
 def rules(request):    
-    return render_to_response("rules.html", context_instance=RequestContext(request))
+	return render_to_response("rules.html", context_instance=RequestContext(request))
 
 def tour(request, nr):
 	if int(nr) == 1:

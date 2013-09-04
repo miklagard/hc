@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load hc %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +10,12 @@
 <link type="text/css" rel="stylesheet" href="/media/css/bootstrap-responsive.min.css" />
 
 <meta name="keywords" content="{% block keyword %}{% endblock %}">
-<script src="/media/js/jquery-1.9.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="/media/js/bootstrap.min.js"></script>
 
 <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -27,15 +27,15 @@
           <a class="brand" href="/">{% trans "Hospitality Club" %}</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">{% trans "Home" %}</a></li>
-              <li><a href="/faq/">{% trans "FAQ" %}</a></li>
-              <li><a href="/tour/1/">{% trans "Tour" %}</a></li>
-				<li><a href="/countries/">{% trans "Countries" %}</a></li>
-				<li><a href="/rules/">{% trans "Rules" %}</a></li>
+              <li class="{% active request '/' %}"><a href="/">{% trans "Home" %}</a></li>
+              <li class="{% active request '/faq/' %}"><a href="/faq/">{% trans "FAQ" %}</a></li>
+              <li class="{% active request '/tour/' %}"><a href="/tour/1/">{% trans "Tour" %}</a></li>
+				<li class="{% active request '/countries/' %}"><a href="/countries/">{% trans "Countries" %}</a></li>
+				<li class="{% active request '/rules/' %}"><a href="/rules/">{% trans "Rules" %}</a></li>
             </ul>
             <ul class="nav pull-right">
-			<li><a href="/accounts/register/">{% trans "Sign Up" %}</a></li>
-			<li><a href="/accounts/login/">{% trans "Log In" %}</a></li>
+			<li class="{% active request '/accounts/register/' %}"><a href="/accounts/register/">{% trans "Sign Up" %}</a></li>
+			<li class="{% active request '/accounts/login/' %}"><a href="/accounts/login/">{% trans "Log In" %}</a></li>
 			</ul>
           </div><!--/.nav-collapse -->
         </div>

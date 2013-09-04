@@ -1,5 +1,6 @@
 # Django settings for hc project.
 import os
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -103,6 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'hc.activeuser_middleware.OnlineUsers',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -169,3 +171,7 @@ LOCALE_PATHS = (
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
